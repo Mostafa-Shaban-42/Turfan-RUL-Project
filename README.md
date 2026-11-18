@@ -5,7 +5,7 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-App-red.svg)](https://streamlit.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-An enterprise-grade, end-to-end Machine Learning and Deep Learning pipeline designed to predict the *Remaining Useful Life (RUL)* of turbofan engines using the benchmark *NASA C-MAPSS (FD001)* dataset. This repository benchmarks multiple state-of-the-art neural architectures—ranging from Baseline MLPs and LSTMs to Hybrid CNN-LSTMs, Transformers, and Attention-augmented networks—tailored for robust Predictive Maintenance (PdM).
+An enterprise-grade, end-to-end Machine Learning and Deep Learning pipeline designed to predict the **Remaining Useful Life (RUL)** of turbofan engines using the benchmark **NASA C-MAPSS (FD001)** dataset. This repository benchmarks multiple state-of-the-art neural architectures—ranging from Baseline MLPs and LSTMs to Hybrid CNN-LSTMs, Transformers, and Attention-augmented networks—tailored for robust Predictive Maintenance (PdM).
 
 ---
 
@@ -28,15 +28,15 @@ Turfan-RUL-Project/
     └── trained/                 # Model checkpoints (.keras) and analytical performance reports (.csv)
 
 🔬 Methodology & Model Benchmarking
-​To ensure rigorous evaluation and avoid single-seed bias, all models are evaluated across 3 distinct random seeds (42, 123, 2026) with early stopping, model checkpointing, and adaptive learning rate reduction (ReduceLROnPlateau).
-​1. Baseline MLP: Fully connected multi-layer perceptron acting as a performance baseline.
-​2. LSTM: Deep Recurrent Neural Network capturing temporal degradation dependencies.
-​3. CNN-LSTM: Hybrid architecture leveraging 1D Convolutions for local spatial feature extraction followed by LSTMs.
-​4. Transformer: Self-attention mechanism combined with learned positional encodings for long-range sequence modeling.
-​5. CNN-LSTM + Attention: Advanced hybrid framework integrating soft-attention mechanisms over convolutional-recurrent representations.
-​🚀 Quick Start & Installation
-​Prerequisites
-​Ensure you have Python 3.10 or higher installed. Clone the repository and install dependencies:
+To ensure rigorous evaluation and avoid single-seed bias, all models are evaluated across 3 distinct random seeds (42, 123, 2026) with early stopping, model checkpointing, and adaptive learning rate reduction (ReduceLROnPlateau).
+Baseline MLP: Fully connected multi-layer perceptron acting as a performance baseline.
+LSTM: Deep Recurrent Neural Network capturing temporal degradation dependencies.
+CNN-LSTM: Hybrid architecture leveraging 1D Convolutions for local spatial feature extraction followed by LSTMs.
+Transformer: Self-attention mechanism combined with learned positional encodings for long-range sequence modeling.
+CNN-LSTM + Attention: Advanced hybrid framework integrating soft-attention mechanisms over convolutional-recurrent representations.
+🚀 Quick Start & Installation
+Prerequisites
+Ensure you have Python 3.10 or higher installed. Clone the repository and install dependencies:
 # 1. Clone the repository
 git clone [https://github.com/Mostafa-Shaban-42/Turfan-RUL-Project.git](https://github.com/Mostafa-Shaban-42/Turfan-RUL-Project.git)
 cd Turfan-RUL-Project
@@ -45,7 +45,7 @@ cd Turfan-RUL-Project
 pip install tensorflow streamlit pandas numpy scikit-learn joblib
 
 Execution Pipeline
-​Run the modular pipeline sequentially to download data, engineer features, train models, and generate evaluation tables:
+Run the modular pipeline sequentially to download data, engineer features, train models, and generate evaluation tables:
 # Step 1: Ingest, validate, clean, and scale the NASA FD001 dataset
 python3 -u data_preprocessing.py
 
@@ -56,13 +56,17 @@ python3 rnn_preprocessing.py
 python3 train_evaluate.py
 
 Interactive Research Dashboard
-​Launch the Streamlit dashboard to visualize comparative benchmark results, ablation studies, and perform real-time single-engine RUL inference:
+Launch the Streamlit dashboard to visualize comparative benchmark results, ablation studies, and perform real-time single-engine RUL inference:
 streamlit run app.py
-
 (Access the local UI via your browser at http://localhost:8501)
-​📊 Performance & Analytical Artifacts
-​The training pipeline automatically generates structured artifacts inside models/trained/ compliant with rigorous reporting standards:
-​Table 4: Main benchmark results reporting Mean \pm Standard Deviation for MAE, RMSE, and NASA Scoring Metric across seeds.
-​Table 5: Ablation study quantifying performance impact upon component removal (e.g., Attention / Conv1D modules).
-​Table 6: Error analysis highlighting worst-performing engines for model robustness auditing.
-​Table 7: Computational cost profiles (parameter sizing and training runtime benchmarks).
+
+📊 Performance & Analytical Artifacts
+The training pipeline automatically generates structured artifacts inside models/trained/ compliant with rigorous reporting standards:
+Table 4: Main benchmark results reporting 
+Mean
+±
+Standard Deviation
+Mean±Standard Deviation for MAE, RMSE, and NASA Scoring Metric across seeds.
+Table 5: Ablation study quantifying performance impact upon component removal (e.g., Attention / Conv1D modules).
+Table 6: Error analysis highlighting worst-performing engines for model robustness auditing.
+Table 7: Computational cost profiles (parameter sizing and training runtime benchmarks).
