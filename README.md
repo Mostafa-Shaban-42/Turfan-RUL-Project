@@ -1,120 +1,68 @@
-# Turbofan RUL - NASA C-MAPSS FD001
+# Turfan RUL Project: NASA C-MAPSS Deep Learning & Remaining Useful Life (RUL) Prediction
 
-**Deep Learning Final Project**
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)](https://tensorflow.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-App-red.svg)](https://streamlit.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> Research-Grade System - 5 Models × 3 Seeds - Full Compliance
-
-[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-blue)](https://python.org)
-[![TensorFlow 2.15](https://img.shields.io/badge/TensorFlow-2.15-orange)](https://tensorflow.org)
-[![Status: Complete](https://img.shields.io/badge/Status-Complete-green)](#results)
+An enterprise-grade, end-to-end Machine Learning and Deep Learning pipeline designed to predict the *Remaining Useful Life (RUL)* of turbofan engines using the benchmark *NASA C-MAPSS (FD001)* dataset. This repository benchmarks multiple state-of-the-art neural architectures—ranging from Baseline MLPs and LSTMs to Hybrid CNN-LSTMs, Transformers, and Attention-augmented networks—tailored for robust Predictive Maintenance (PdM).
 
 ---
 
-## 📁 Actual Project Tree (Your Current Structure)
-turfan/
+## 🏗️ System Architecture & Engineering Pipeline
+
+```text
+Turfan-RUL-Project/
+│
+├── data_preprocessing.py        # Automated ingestion, validation, variance-based feature selection, and scaling
+├── rnn_preprocessing.py         # Temporal sliding-window sequence generation (Window Size = 30, RUL Capped = 125)
+├── train_evaluate.py            # Multi-seed training framework (Seeds: 42, 123, 2026) with ablation study & error metrics
+├── app.py                       # Interactive Streamlit Research Dashboard & Real-Time Inference Engine
+├── README.md                    # Comprehensive System Documentation
 ├── data/
-│   ├── raw/                              # 3 files - Original NASA data
-│   │   ├── train_FD001.txt               # 20,631 rows × 26 cols - 100 engines
-│   │   ├── test_FD001.txt                # 13,096 rows × 26 cols - 100 engines
-│   │   └── RUL_FD001.txt                 # 100 rows - Official Ground Truth
-│   ├── processed/                        # 5 files - Scaled + Metadata
-│   │   ├── train_scaled.csv
-│   │   ├── validation_scaled.csv
-│   │   ├── test_scaled.csv
-│   │   ├── metadata.json                 # experiment_id, hypotheses H1-H4, sha256
-│   │   └── official_test_rul.npy
-│   └── sequences/                        # 8 files - Windowed arrays (window=30)
-│       ├── X_train.npy, y_train.npy
-│       ├── X_validation.npy, y_validation.npy
-│       ├── X_test.npy, y_test.npy
-│       ├── test_engine_ids.npy
-│       └── sequence_manifest.json
-├── models/
-│   └── scalers/
-│       └── standard_scaler.joblib        # StandardScaler fit on train only
-├── trained/                              # 19 files - 15 models + 4 tables + logs
-│   ├── baseline_mlp_seed42.keras
-│   ├── baseline_mlp_seed123.keras
-│   ├── baseline_mlp_seed2026.keras
-│   ├── lstm_seed42.keras
-│   ├── lstm_seed123.keras
-│   ├── lstm_seed2026.keras
-│   ├── cnn_lstm_seed42.keras
-│   ├── cnn_lstm_seed123.keras
-│   ├── cnn_lstm_seed2026.keras
-│   ├── transformer_seed42.keras
-│   ├── transformer_seed123.keras
-│   ├── transformer_seed2026.keras
-│   ├── cnn_lstm_attention_seed42.keras   # BEST MODEL
-│   ├── cnn_lstm_attention_seed123.keras
-│   ├── cnn_lstm_attention_seed2026.keras
-│   ├── Table4_Main_Results_mean_sd.csv    # REQUIRED - Main results mean±SD
-│   ├── Table5_Ablation.csv               # REQUIRED - Ablation Study
-│   ├── Table6_Error_Analysis.csv         # REQUIRED - Top 10 worst engines
-│   ├── Table7_Computational_Cost.csv      # REQUIRED - Params & Time
-│   ├── all_runs.csv                      # All 15 runs detailed
-│   └── metrics.json
-├── data_preprocessing.py                 # File 1: Download + Validate + Split + Scale
-├── rnn_preprocessing.py                  # File 2: Build 30-window sequences
-├── train_evaluate.py                     # File 3: Train 5×3=15 models + Tables
-├── app.py                                # File 4: Streamlit Full Comparison Demo
-├── rnn_preprocesssing.py                 # DUPLICATE - Delete this (typo)
-├── README.md                             # This file
-└── .DS_Store                             # Mac system file - ignore
+│   ├── raw/                     # Raw NASA C-MAPSS FD001 telemetry text files
+│   ├── processed/               # Standardized scaled CSVs and experiment metadata (JSON)
+│   └── sequences/               # NumPy array tensors (.npy) optimized for rapid training
+└── models/
+    ├── scalers/                 # Persistent sklearn StandardScaler artifacts (.joblib)
+    └── trained/                 # Model checkpoints (.keras) and analytical performance reports (.csv)
 
----
+🔬 Methodology & Model Benchmarking
+​To ensure rigorous evaluation and avoid single-seed bias, all models are evaluated across 3 distinct random seeds (42, 123, 2026) with early stopping, model checkpointing, and adaptive learning rate reduction (ReduceLROnPlateau).
+​1. Baseline MLP: Fully connected multi-layer perceptron acting as a performance baseline.
+​2. LSTM: Deep Recurrent Neural Network capturing temporal degradation dependencies.
+​3. CNN-LSTM: Hybrid architecture leveraging 1D Convolutions for local spatial feature extraction followed by LSTMs.
+​4. Transformer: Self-attention mechanism combined with learned positional encodings for long-range sequence modeling.
+​5. CNN-LSTM + Attention: Advanced hybrid framework integrating soft-attention mechanisms over convolutional-recurrent representations.
+​🚀 Quick Start & Installation
+​Prerequisites
+​Ensure you have Python 3.10 or higher installed. Clone the repository and install dependencies:
+# 1. Clone the repository
+git clone [https://github.com/Mostafa-Shaban-42/Turfan-RUL-Project.git](https://github.com/Mostafa-Shaban-42/Turfan-RUL-Project.git)
+cd Turfan-RUL-Project
 
-## 1. Dataset Details
+# 2. Install required packages
+pip install tensorflow streamlit pandas numpy scikit-learn joblib
 
-**NASA C-MAPSS FD001 - Turbofan Engine Degradation**
+Execution Pipeline
+​Run the modular pipeline sequentially to download data, engineer features, train models, and generate evaluation tables:
+# Step 1: Ingest, validate, clean, and scale the NASA FD001 dataset
+python3 -u data_preprocessing.py
 
-- **What it is:** Simulated 100 engines run to failure, 100 engines truncated
-- **Rows:** Train 20,631, Test 13,096, RUL 100
-- **26 Columns:** `engine_id`, `cycle`, `setting_1-3`, `sensor_1-21`
-- **Sensors:** Temperatures T2,T24,T30,T50, Pressures P2,P15,P30, Fan speeds Nf,Nc, etc.
+# Step 2: Generate fixed-length temporal sliding windows for training/testing
+python3 rnn_preprocessing.py
 
-**Preprocessing Logic (data_preprocessing.py):**
-- Download from `SumantMalekar/CMAPSSData` with HTML check `<html` + `<!doctype`
-- Validate: 26 cols, numeric, finite, no NaN, no duplicates, cycles strictly increasing
-- **Engine-Level Split (Critical):** 80 train engines, 20 val engines, 100 test engines separate - prevents leakage
-- Variance filter `>1e-3` → ~17 effective features from 21 sensors
-- Scaler fit on train only → `models/scalers/standard_scaler.joblib`
+# Step 3: Train all model configurations across multi-seeds and export metrics
+python3 train_evaluate.py
 
----
-
-## 2. Input / Output
-
-- **Input:** Window `X ∈ R^(30 × F)` where F≈17 selected sensors, last 30 cycles
-- **Output:** Scalar RUL `y ∈ R+` capped at 125 (standard in literature)
-- **Example:** Engine 5 last 30 cycles → Model predicts `28.5 cycles` remaining
-
----
-
-## 3. Installation & Quick Fix
-
-Your current tree has 2 issues to fix for 100% mark:
-
-```bash
-cd /Users/mac/Projects/turfan  # your path from tree
-
-# 1. Delete duplicate typo file
-rm -f rnn_preprocesssing.py
-
-# 2. Fix structure to match spec 4.1 (trained should be inside models/)
-mkdir -p models/trained
-cp trained/* models/trained/ 2>/dev/null
-# Keep both for safety, app.py will auto-detect
-
-# 3. Install deps
-pip install numpy pandas scikit-learn tensorflow joblib streamlit
-
-# 4. Run demo
+Interactive Research Dashboard
+​Launch the Streamlit dashboard to visualize comparative benchmark results, ablation studies, and perform real-time single-engine RUL inference:
 streamlit run app.py
-streamlit run app.py
-# Open http://localhost:8501
 
-Full pipeline from scratch
-python data_preprocessing.py   # Step 1: 30 sec
-python rnn_preprocessing.py    # Step 2: 10 sec
-python train_evaluate.py       # Step 3: 60-120 min for 15 models
-streamlit run app.py           # Step 4
+(Access the local UI via your browser at http://localhost:8501)
+​📊 Performance & Analytical Artifacts
+​The training pipeline automatically generates structured artifacts inside models/trained/ compliant with rigorous reporting standards:
+​Table 4: Main benchmark results reporting Mean \pm Standard Deviation for MAE, RMSE, and NASA Scoring Metric across seeds.
+​Table 5: Ablation study quantifying performance impact upon component removal (e.g., Attention / Conv1D modules).
+​Table 6: Error analysis highlighting worst-performing engines for model robustness auditing.
+​Table 7: Computational cost profiles (parameter sizing and training runtime benchmarks).
