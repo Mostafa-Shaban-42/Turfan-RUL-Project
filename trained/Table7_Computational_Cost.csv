@@ -1,0 +1,6 @@
+model,params,training_time_est
+baseline_mlp,62209,~5-15 min per seed (Colab GPU)
+cnn_lstm,54401,~5-15 min per seed (Colab GPU)
+cnn_lstm_attention,52417,~5-15 min per seed (Colab GPU)
+lstm,57473,~5-15 min per seed (Colab GPU)
+transformer,38657,~5-15 min per seed (Colab GPU)

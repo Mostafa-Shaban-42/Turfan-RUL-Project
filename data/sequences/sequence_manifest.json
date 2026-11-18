@@ -1,0 +1,50 @@
+{
+  "experiment_id": "fd001_20261118T134138Z",
+  "window_size": 30,
+  "rul_cap": 125,
+  "input_features": [
+    "sensor_2",
+    "sensor_3",
+    "sensor_4",
+    "sensor_7",
+    "sensor_8",
+    "sensor_9",
+    "sensor_11",
+    "sensor_12",
+    "sensor_13",
+    "sensor_14",
+    "sensor_15",
+    "sensor_17",
+    "sensor_20",
+    "sensor_21"
+  ],
+  "shapes": {
+    "X_train": [
+      14241,
+      30,
+      14
+    ],
+    "y_train": [
+      14241
+    ],
+    "X_validation": [
+      3490,
+      30,
+      14
+    ],
+    "y_validation": [
+      3490
+    ],
+    "X_test": [
+      100,
+      30,
+      14
+    ],
+    "y_test": [
+      100
+    ],
+    "test_engine_ids": [
+      100
+    ]
+  }
+}

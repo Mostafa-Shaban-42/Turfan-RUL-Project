@@ -1,0 +1,3 @@
+component_removed,model,delta_rmse_vs_full
+Attention,cnn_lstm,1.0788876215616838
+Conv1D,lstm,-2.3480717341105137
