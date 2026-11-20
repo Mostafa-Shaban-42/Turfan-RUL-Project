@@ -1,0 +1,17 @@
+# Python
+_pycache_/
+*.pyc
+.venv/
+venv/
+venv311/
+.env
+
+data/raw/
+data/sequences/*.npy
+*.npy
+
+# Streamlit / OS
+.streamlit/
+.DS_Store
+
+*.ckpt
